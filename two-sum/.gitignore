@@ -1,0 +1,5 @@
+# Compiled binaries
+cpp/test
+*.o
+*.out
+*.class
