@@ -1,5 +1,7 @@
 # Two Sum — Multi-Language Implementation
 
+[![CI](https://github.com/xilon-my/symphony-test/actions/workflows/ci.yml/badge.svg)](https://github.com/xilon-my/symphony-test/actions/workflows/ci.yml)
+
 Given an array of integers `nums` and an integer `target`, return indices of the two numbers such that they add up to `target`.
 
 Each implementation uses a hash-map approach with **O(n)** time and **O(n)** space complexity.
