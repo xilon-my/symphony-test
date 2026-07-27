@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+
+      - name: Setup Rust
+        run: |
+          rustup update stable
+          rustup default stable
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "21"
+
+      - name: Python tests
+        working-directory: two-sum/python
+        run: python3 test_two_sum.py
+
+      - name: JavaScript tests
+        working-directory: two-sum/javascript
+        run: node test_twoSum.js
+
+      - name: Go tests
+        working-directory: two-sum/go
+        run: go test ./...
+
+      - name: Rust tests
+        working-directory: two-sum/rust
+        run: cargo test
+
+      - name: Java tests
+        working-directory: two-sum/java
+        run: |
+          javac TwoSum.java
+          java TwoSum
+
+      - name: C++ tests
+        working-directory: two-sum/cpp
+        run: |
+          g++ -std=c++17 test_two_sum.cpp two_sum.cpp -o test
+          ./test
